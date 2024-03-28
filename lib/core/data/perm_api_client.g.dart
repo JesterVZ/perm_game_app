@@ -19,13 +19,13 @@ class _PermApiClient implements PermApiClient {
   String? baseUrl;
 
   @override
-  Future<Question> getQuestion() async {
+  Future<QuestionResponse> getQuestion() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Question>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<QuestionResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -41,36 +41,7 @@ class _PermApiClient implements PermApiClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Question.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<List<Answer>> getAnswers(int questionId) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'question_id': questionId};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Answer>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/answers',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) => Answer.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = QuestionResponse.fromJson(_result.data!);
     return value;
   }
 

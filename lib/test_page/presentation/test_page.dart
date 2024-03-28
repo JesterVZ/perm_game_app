@@ -36,9 +36,7 @@ class _TestPageState extends State<TestPage> {
             case QuestionsError():
               return const Center(child: Text('Ошибка получения текств вопроса'));
             case QuestionsSuccess():
-              return QAView(question: state.question, correctAnswer: () { 
-                questionsCubit.fetchQuestion();
-               }, incorrectAnswer: () {  },);
+              return QAView(response: state.question);
           }
         },),
     );
