@@ -27,7 +27,7 @@ class DioFactoryImpl implements DioFactory{
   /// Возвращает основную конфигурацию для объекта Dio
   BaseOptions _createOptions() {
     return BaseOptions(
-      baseUrl: 'http://localhost:3000',
+      baseUrl: 'http://176.57.213.98:3000',
       connectTimeout: const Duration(seconds: App.apiRequestTimeout),
       contentType: 'application/json',
     );
