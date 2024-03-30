@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:perm_game_app/core/presentation/app_ui.dart';
 
 enum TestResult{
   veryBad,
@@ -34,6 +35,19 @@ extension TestResultExt on TestResult{
         return 'Вы очень хорошо знаете историю Перми, даже слишком хорошо. Так держать!';
     }
   }
+
+  String get getImagePath{
+    switch(this){
+      case TestResult.veryBad:
+        return AppUI.badResult;
+      case TestResult.notBad:
+        return AppUI.notbadResult;
+      case TestResult.good:
+        return AppUI.goodResult;
+      case TestResult.theBest:
+        return AppUI.theBestResult;
+    }
+  }
 }
 
 class ResultsPage extends StatelessWidget {
@@ -51,7 +65,9 @@ class ResultsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text("Ваш результат $score из 10, вы ${result.getTitle}", style: Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 40),),
-            Text(result.getDescription, style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 25),)
+            Image.asset(result.getImagePath, width: 300, height: 300, fit: BoxFit.contain,),
+            Text(result.getDescription, style: Theme.of(context).textTheme.titleMedium!.copyWith(fontSize: 25),),
+            
           ],
         ),
       ),

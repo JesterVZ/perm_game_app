@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:perm_game_app/test_page/presentation/results_page.dart';
 import 'package:perm_game_app/test_page/presentation/test_page.dart';
 
 class MainMenuPage extends StatefulWidget {
@@ -47,7 +48,7 @@ class _MainMenuPageState extends State<MainMenuPage> {
                                     padding: const EdgeInsets.all(50),
                                 
                                     side: const BorderSide(width: 8, color: Colors.white)),
-                                  onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (context) => const TestPage(),), ), child: Text("Начать игру", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white, fontSize: 39, fontWeight: FontWeight.bold),),),
+                                  onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (context) => const ResultsPage(score: 7),), ), child: Text("Начать игру", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.white, fontSize: 39, fontWeight: FontWeight.bold),),),
                               ),
                             ),
                           ),
