@@ -34,7 +34,7 @@ class _TestPageState extends State<TestPage> {
             case QuestionsLoading():
               return const Center(child: CircularProgressIndicator(),);
             case QuestionsError():
-              return const Center(child: Text('Ошибка получения текств вопроса'));
+              return const Center(child: Text('Ошибка получения текста вопроса'));
             case QuestionsSuccess():
               return QAView(response: state.question);
           }

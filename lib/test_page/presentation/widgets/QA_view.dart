@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:perm_game_app/test_page/data/question_response.dart';
+import 'package:perm_game_app/test_page/presentation/results_page.dart';
 
 class QAView extends StatefulWidget {
   final QuestionResponse response;
@@ -20,6 +22,9 @@ class _QAViewState extends State<QAView> {
   final PageController pageController = PageController();
 
   int pageIndex = 0;
+
+  int correctAnswersCount = 0;
+  bool isAnswerSelected = false;
 
   @override
   void initState() {
@@ -50,7 +55,7 @@ class _QAViewState extends State<QAView> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyLarge!
-                          .copyWith(fontSize: 40),
+                          .copyWith(fontSize: 30),
                     )),
                   ],
                 )),
@@ -104,19 +109,31 @@ class _QAViewState extends State<QAView> {
         child: TextButton(
       child: Text(
         answer.answerText!,
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 40),
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 40, color: 
+          isAnswerSelected ? answer.getIsCorrect ? const Color.fromARGB(255, 48, 122, 51) : const Color.fromARGB(255, 167, 49, 41): null) 
       ),
-      onPressed: () {
-        if(pageIndex == questions.length - 1){
-          Navigator.pop(context);
+      onPressed: () async {
+        setState(() {
+          isAnswerSelected = true;
+        });
+        await Future.delayed(const Duration(seconds: 1));
+        setState(() {
+          isAnswerSelected = false;
+        });
+        if (pageIndex == questions.length - 1) {
+          if(mounted){
+            Navigator.push(context, CupertinoPageRoute(builder: (context) => ResultsPage(score: correctAnswersCount,),), );
+          }
+          
         } else {
           if (answer.getIsCorrect) {
+            correctAnswersCount++;
+          } else {
+          }
           pageController.nextPage(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.linear);
-        } else {}
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.linear);
         }
-        
       },
     ));
   }
